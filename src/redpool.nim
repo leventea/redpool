@@ -54,7 +54,7 @@ proc release*(pool: RedisPool; conn: Redis) =
 
 template withAcquire*(pool: RedisPool; conn, body: untyped) =
   when (NimMajor, NimMinor, NimPatch) >= (1, 3, 1):
-    let `conn` {.inject.} = await pool.acquire()
+    let `conn` {.inject.} = pool.acquire()
     try:
       body
     finally:
